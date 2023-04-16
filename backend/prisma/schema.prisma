@@ -31,4 +31,27 @@ model User {
   location         String
   bannerPath       String
   avatarPath       String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  videos           Video[]
+}
+
+model Video {
+  id               String @id @default(uuid())
+  author           User @relation(fields: [authorId], references: [id])
+  authorId         String
+  name             String
+  isPublic         String
+  views            Int? @default(0)
+  like             Int? @default(0)
+  dislike          Int? @default(0)
+  description      String
+  videoPath        String
+  thumbnailPath    String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Comment {
+  id               String @id @default(uuid())
 }
