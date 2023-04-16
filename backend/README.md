@@ -2,6 +2,7 @@
 
 ```bash
 $ npm install @nestjs/jwt @nestjs/passport bcryptjs class-validator passport passport-jwt
+$ npm install @nestjs/config
 $ npm install app-root-path
 $ npm install -D @types/app-root-path
 $ npm install -D @types/bcryptjs
