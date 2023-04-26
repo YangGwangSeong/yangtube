@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,4 +15,49 @@ model Article {
   published   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id               String    @id @default(uuid()) @db.VarChar(36)
+  name             String    @db.VarChar(30)
+  email            String    @unique @db.VarChar(60)
+  password         String    @db.VarChar(60)
+  isVerified       String
+  subscribersCount Int
+  description      String    @db.VarChar(120)
+  location         String    @db.VarChar(60)
+  bannerPath       String    @db.VarChar(60)
+  avatarPath       String    @db.VarChar(60)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  comments         Comment[]
+  videos           Video[]
+}
+
+model Video {
+  id            String    @id @default(uuid()) @db.VarChar(36)
+  authorId      String
+  name          String    @db.VarChar(50)
+  isPublic      String
+  views         Int?      @default(0)
+  like          Int?      @default(0)
+  dislike       Int?      @default(0)
+  description   String
+  videoPath     String
+  thumbnailPath String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  comments      Comment[]
+  author        User      @relation(fields: [authorId], references: [id])
+}
+
+model Comment {
+  id            String @id @default(uuid()) @db.VarChar(36)
+  authorId      String
+  videoId       String
+  message       String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  author   User   @relation(fields: [authorId], references: [id])
+  video    Video  @relation(fields: [videoId], references: [id])
 }
