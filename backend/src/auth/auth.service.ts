@@ -16,6 +16,15 @@ export class AuthService {
 		private readonly prisma: PrismaService,
 	) {}
 
+	async login(dto: AuthDto) {
+		const user = await this.validateUser(dto);
+
+		return {
+			user: user,
+			accessToken: await this.issueAccessToken(user.id),
+		};
+	}
+
 	async register(dto: AuthDto) {
 		const oldUser = await this.prisma.user.findUnique({
 			where: {
@@ -47,6 +56,20 @@ export class AuthService {
 			user: newUser,
 			accessToken: await this.issueAccessToken(newUser.id),
 		};
+	}
+
+	async validateUser(dto: AuthDto): Promise<User> {
+		const user = await this.prisma.user.findUnique({
+			where: {
+				email: dto.email,
+			},
+		});
+		if (!user) throw new UnauthorizedException('User not found');
+
+		const isValidPassword = await compare(dto.password, user.password);
+		if (!isValidPassword) throw new UnauthorizedException('Invalid password');
+
+		return user;
 	}
 
 	async issueAccessToken(userId: string): Promise<string> {
