@@ -9,4 +9,5 @@ $ npm install -D @types/bcryptjs
 $ npm install --save-dev @types/passport-jwt
 $ npm install prisma --save-dev
 $ npm install @prisma/client
+$ npm install class-transformer
 ```
