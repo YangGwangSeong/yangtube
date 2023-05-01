@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
-import {} from 'react-icons/md';
+import { MdPermMedia, MdSupport } from 'react-icons/md';
 
 const Sidebar: FC = () => (
 	<section className="sidebar">
