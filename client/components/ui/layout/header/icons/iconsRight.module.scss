@@ -2,3 +2,7 @@
 	@apply absolute;
 	top: 19px;
 }
+
+.button {
+	@apply inline-flex mx-2 items-center justify-center text-2xl;
+}

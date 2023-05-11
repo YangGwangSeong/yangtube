@@ -5,7 +5,7 @@ import styles from './AuthForm.module.scss';
 const AuthForm: FC = () => {
 	return (
 		<div>
-			<button>
+			<button className={styles.button}>
 				<FaUserCircle fill="#A4A4A4"></FaUserCircle>
 			</button>
 		</div>
