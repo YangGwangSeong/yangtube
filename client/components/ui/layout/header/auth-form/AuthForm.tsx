@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import styles from './AuthForm.module.scss';
+import Field from '@/components/ui/field/Field';
 
 const AuthForm: FC = () => {
 	return (
@@ -8,7 +9,9 @@ const AuthForm: FC = () => {
 			<button className={styles.button}>
 				<FaUserCircle fill="#A4A4A4"></FaUserCircle>
 			</button>
-			<div className={styles.form}></div>
+			<div className={styles.form}>
+				<Field></Field>
+			</div>
 		</div>
 	);
 };
