@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import IconsRight from './icons/IconsRight';
 
 const Header: FC = () => {
 	return (
@@ -14,17 +15,7 @@ const Header: FC = () => {
 					<Image src="search.svg" alt=""></Image>
 				</label>
 			</div>
-			<div className="icons_right">
-				<Link href="#">
-					<Image src="plug.svg" alt=""></Image>
-				</Link>
-				<Link href="#">
-					<Image src="review.svg" alt=""></Image>
-				</Link>
-				<Link href="#">
-					<Image src="basket.svg" alt=""></Image>
-				</Link>
-			</div>
+			<IconsRight></IconsRight>
 		</header>
 	);
 };

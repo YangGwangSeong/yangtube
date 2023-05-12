@@ -15,7 +15,7 @@ interface DataType {
 	accessToken: string;
 }
 
-interface ContextType {
+interface ContextType extends DataType {
 	setData: Dispatch<SetStateAction<DataType>> | null;
 }
 
