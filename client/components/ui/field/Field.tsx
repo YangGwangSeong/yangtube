@@ -3,7 +3,7 @@ import { Field as IField } from './field.interface';
 import cn from 'classnames';
 import styles from './Field.module.scss';
 
-const Field: FC = forwardRef<HTMLInputElement, IField>(
+const Field = forwardRef<HTMLInputElement, IField>(
 	({ error, type = 'text', style, ...rest }, ref) => {
 		return (
 			<div className={styles.field} style={style}>
