@@ -50,12 +50,14 @@ const AuthForm: FC = () => {
 					placeholder="Password"
 					error={errors.password}
 				></Field>
-				<Button type="submit" onClick={() => setType('login')}>
-					Login
-				</Button>
+				<div className={'mt-2 mb-1 text-center'}>
+					<Button type="submit" onClick={() => setType('login')}>
+						Login
+					</Button>
+				</div>
 				<Button
 					type="submit"
-					className={'text-sm'}
+					className={styles.register}
 					onClick={() => setType('register')}
 				>
 					Register
