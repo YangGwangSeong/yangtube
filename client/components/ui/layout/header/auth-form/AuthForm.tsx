@@ -6,8 +6,11 @@ import Button from '@/components/ui/button/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AuthFields } from './auth-form.interface';
 import { validEmail } from './auth.constants';
+import { useOutside } from '@/hooks/useOutside';
 
 const AuthForm: FC = () => {
+	const { ref, setIsShow, isShow } = useOutside(false);
+
 	const [type, setType] = useState<'login' | 'register'>('login');
 
 	const {
@@ -23,46 +26,48 @@ const AuthForm: FC = () => {
 		else if (type === 'register') console.log('register', data.email);
 	};
 	return (
-		<div className={styles.wrapper}>
-			<button className={styles.button}>
+		<div className={styles.wrapper} ref={ref}>
+			<button className={styles.button} onClick={() => setIsShow(!isShow)}>
 				<FaUserCircle fill="#A4A4A4"></FaUserCircle>
 			</button>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-				<Field
-					{...register('email', {
-						required: 'Email is required',
-						pattern: {
-							value: validEmail,
-							message: 'Please enter a valid email address',
-						},
-					})}
-					placeholder="Email"
-					error={errors.email}
-				></Field>
-				<Field
-					{...register('password', {
-						required: 'Password is required',
-						minLength: {
-							value: 6,
-							message: 'Min length should more 6 symbols',
-						},
-					})}
-					placeholder="Password"
-					error={errors.password}
-				></Field>
-				<div className={'mt-2 mb-1 text-center'}>
-					<Button type="submit" onClick={() => setType('login')}>
-						Login
+			{isShow && (
+				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+					<Field
+						{...register('email', {
+							required: 'Email is required',
+							pattern: {
+								value: validEmail,
+								message: 'Please enter a valid email address',
+							},
+						})}
+						placeholder="Email"
+						error={errors.email}
+					></Field>
+					<Field
+						{...register('password', {
+							required: 'Password is required',
+							minLength: {
+								value: 6,
+								message: 'Min length should more 6 symbols',
+							},
+						})}
+						placeholder="Password"
+						error={errors.password}
+					></Field>
+					<div className={'mt-5 mb-1 text-center'}>
+						<Button type="submit" onClick={() => setType('login')}>
+							Login
+						</Button>
+					</div>
+					<Button
+						type="submit"
+						className={styles.register}
+						onClick={() => setType('register')}
+					>
+						Register
 					</Button>
-				</div>
-				<Button
-					type="submit"
-					className={styles.register}
-					onClick={() => setType('register')}
-				>
-					Register
-				</Button>
-			</form>
+				</form>
+			)}
 		</div>
 	);
 };
