@@ -1,3 +1,4 @@
+import { AuthData } from '@/services/auth/auth.helper';
 import React, {
 	Dispatch,
 	FC,
@@ -7,22 +8,14 @@ import React, {
 	useState,
 } from 'react';
 
-interface DataType {
-	user: {
-		id: string;
-		email: string;
-	} | null;
-	accessToken: string;
-}
-
-interface ContextType extends DataType {
-	setData: Dispatch<SetStateAction<DataType>> | null;
+interface ContextType extends AuthData {
+	setData: Dispatch<SetStateAction<AuthData>> | null;
 }
 
 export const AuthContext = createContext({} as ContextType);
 
 const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
-	const [data, setData] = useState<DataType>({
+	const [data, setData] = useState<AuthData>({
 		user: null,
 		accessToken: '',
 	});
