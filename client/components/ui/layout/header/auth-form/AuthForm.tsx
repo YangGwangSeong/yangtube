@@ -7,6 +7,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { AuthFields } from './auth-form.interface';
 import { validEmail } from './auth.constants';
 import { useOutside } from '@/hooks/useOutside';
+import { useMutation } from 'react-query';
+import { AuthService } from '@/services/auth/auth.service';
+import { useAuth } from '@/hooks/useAuth';
 
 const AuthForm: FC = () => {
 	const { ref, setIsShow, isShow } = useOutside(false);
@@ -21,10 +24,23 @@ const AuthForm: FC = () => {
 		mode: 'onChange',
 	});
 
+	const { setData } = useAuth();
+
+	const { mutate: login } = useMutation(
+		'login',
+		(data: AuthFields) => AuthService.login(data.email, data.password),
+		{
+			onSuccess(data) {
+				if (setData) setData(data);
+			},
+		},
+	);
+
 	const onSubmit: SubmitHandler<AuthFields> = data => {
-		if (type === 'login') console.log(data.email);
+		if (type === 'login') login(data);
 		else if (type === 'register') console.log('register', data.email);
 	};
+
 	return (
 		<div className={styles.wrapper} ref={ref}>
 			<button className={styles.button} onClick={() => setIsShow(!isShow)}>
@@ -51,6 +67,7 @@ const AuthForm: FC = () => {
 								message: 'Min length should more 6 symbols',
 							},
 						})}
+						type={'password'}
 						placeholder="Password"
 						error={errors.password}
 					></Field>
