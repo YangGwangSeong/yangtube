@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
+import Slider from './Slider';
 
 const WeeklyFeatured: FC = () => {
 	return (
@@ -11,46 +12,7 @@ const WeeklyFeatured: FC = () => {
 					Loerm ipsum dolor sit amet, consectetur adipisicing elit. Aliguam
 					harum
 				</div>
-				<div className="sidebar_wf">
-					<div className="video_item">
-						<div className="thumbnail">
-							<Image src="1.jpg" alt=""></Image>
-							<time>16:55</time>
-						</div>
-						<div className="author">Michel Adams</div>
-						<div className="name">Day in my life: Summer ...</div>
-						<div className="number_info">
-							<div className="views">VIEWS 28.6K</div>
-							<div className="date">6DS AGO</div>
-						</div>
-					</div>
-
-					<div className="video_item">
-						<div className="thumbnail">
-							<Image src="1.jpg" alt=""></Image>
-							<time>16:55</time>
-						</div>
-						<div className="author">Michel Adams</div>
-						<div className="name">Day in my life: Summer ...</div>
-						<div className="number_info">
-							<div className="views">VIEWS 28.6K</div>
-							<div className="date">6DS AGO</div>
-						</div>
-					</div>
-
-					<div className="video_item">
-						<div className="thumbnail">
-							<Image src="1.jpg" alt=""></Image>
-							<time>16:55</time>
-						</div>
-						<div className="author">Michel Adams</div>
-						<div className="name">Day in my life: Summer ...</div>
-						<div className="number_info">
-							<div className="views">VIEWS 28.6K</div>
-							<div className="date">6DS AGO</div>
-						</div>
-					</div>
-				</div>
+				<Slider />
 			</div>
 
 			<div className="top_video">
