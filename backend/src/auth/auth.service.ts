@@ -43,7 +43,7 @@ export class AuthService {
 				email: dto.email,
 				password: await hash(dto.password, salt),
 				name: '',
-				isVerified: '',
+				isVerified: true,
 				subscribersCount: 0,
 				description: '',
 				location: '',
