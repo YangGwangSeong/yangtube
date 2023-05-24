@@ -26,7 +26,7 @@ const AuthForm: FC = () => {
 
 	const { setData } = useAuth();
 
-	const { mutate: login } = useMutation(
+	const { mutate: loginSync } = useMutation(
 		'login',
 		(data: AuthFields) => AuthService.login(data.email, data.password),
 		{
@@ -36,9 +36,19 @@ const AuthForm: FC = () => {
 		},
 	);
 
+	const { mutate: registerSync } = useMutation(
+		'register',
+		(data: AuthFields) => AuthService.register(data.email, data.password),
+		{
+			onSuccess(data) {
+				if (setData) setData(data);
+			},
+		},
+	);
+
 	const onSubmit: SubmitHandler<AuthFields> = data => {
-		if (type === 'login') login(data);
-		else if (type === 'register') console.log('register', data.email);
+		if (type === 'login') loginSync(data);
+		else if (type === 'register') registerSync(data);
 	};
 
 	return (
