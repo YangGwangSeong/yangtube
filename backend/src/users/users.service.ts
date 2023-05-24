@@ -49,4 +49,12 @@ export class UsersService {
 			data: user,
 		});
 	}
+
+	async getMostPopular() {
+		return this.prisma.user.findMany({
+			where: {
+				subscribersCount: { gt: 0 },
+			},
+		});
+	}
 }
