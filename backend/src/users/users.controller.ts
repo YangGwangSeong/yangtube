@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Get,
 	HttpCode,
 	Put,
 	UsePipes,
@@ -15,6 +16,12 @@ import { CurrentUser } from './decorators/user.decorator';
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
+	@Get('profile')
+	@Auth()
+	async getProfile(@CurrentUser('id') id: string) {
+		return this.usersService.byId(id);
+	}
+
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Put('profile')
@@ -23,9 +30,12 @@ export class UsersController {
 		@CurrentUser('id') id: string,
 		@Body() dto: UserDto,
 	): Promise<void> {
-		return this.usersService.updateProfile(
-			'441c8f2c-5ac9-4e93-a245-ef5d8f8e0a7f',
-			dto,
-		);
+		return this.usersService.updateProfile(id, dto);
+	}
+
+	@Get('most-popular')
+	@Auth()
+	async getMostPopular() {
+		return this.usersService.getMostPopular();
 	}
 }

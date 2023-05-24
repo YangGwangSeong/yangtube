@@ -7,12 +7,23 @@ import { genSalt, hash } from 'bcryptjs';
 export class UsersService {
 	constructor(private readonly prisma: PrismaService) {}
 
+	exclude<User, Key extends keyof User>(
+		user: User,
+		keys: Key[],
+	): Omit<User, Key> {
+		for (let key of keys) {
+			delete user[key];
+		}
+		return user;
+	}
+
 	async byId(_id: string) {
 		const user = await this.prisma.user.findUnique({
 			where: {
 				id: _id,
 			},
 		});
+		this.exclude(user, ['password', 'createdAt', 'updatedAt']);
 
 		if (!user) throw new UnauthorizedException('User not found');
 
@@ -51,10 +62,26 @@ export class UsersService {
 	}
 
 	async getMostPopular() {
-		return this.prisma.user.findMany({
+		const user = this.prisma.user.findMany({
 			where: {
 				subscribersCount: { gt: 0 },
 			},
+			select: {
+				id: true,
+				name: true,
+				email: true,
+				isVerified: true,
+				subscribersCount: true,
+				description: true,
+				location: true,
+				bannerPath: true,
+				avatarPath: true,
+			},
+			orderBy: {
+				subscribersCount: 'desc',
+			},
 		});
+
+		return user;
 	}
 }
