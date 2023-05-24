@@ -21,7 +21,7 @@ export class AppService {
 				name: 'username',
 				email: 'rhkdtjd_12@naver.com',
 				password: 'rhkdtjd83**',
-				isVerified: 'test2',
+				isVerified: true,
 				subscribersCount: 123,
 				description: 'test2',
 				location: '123',

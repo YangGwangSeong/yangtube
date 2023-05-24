@@ -22,8 +22,8 @@ model User {
   name             String    @db.VarChar(30)
   email            String    @unique @db.VarChar(60)
   password         String    @db.VarChar(60)
-  isVerified       String
-  subscribersCount Int
+  isVerified       Boolean
+  subscribersCount Int?      @default(0)
   description      String    @db.VarChar(120)
   location         String    @db.VarChar(60)
   bannerPath       String    @db.VarChar(60)
@@ -52,12 +52,12 @@ model Video {
 }
 
 model Comment {
-  id            String @id @default(uuid()) @db.VarChar(36)
-  authorId      String
-  videoId       String
-  message       String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  author   User   @relation(fields: [authorId], references: [id])
-  video    Video  @relation(fields: [videoId], references: [id])
+  id        String   @id @default(uuid()) @db.VarChar(36)
+  authorId  String
+  videoId   String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id])
+  video     Video    @relation(fields: [videoId], references: [id])
 }
