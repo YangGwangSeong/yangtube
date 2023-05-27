@@ -57,4 +57,19 @@ export class VideosService {
 		});
 		return video;
 	}
+
+	async byUserId(userId: string, isPrivate = false) {
+		let where = {};
+		isPrivate
+			? (where = { authorId: userId })
+			: (where = { isPublic: 'true', authorId: userId });
+
+		const video = this.prisma.video.findMany({
+			where,
+			orderBy: {
+				createdAt: 'desc',
+			},
+		});
+		return video;
+	}
 }
