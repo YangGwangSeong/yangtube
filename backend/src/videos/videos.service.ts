@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { VideoDto } from './video/video.dto';
 
 @Injectable()
 export class VideosService {
@@ -71,5 +72,28 @@ export class VideosService {
 			},
 		});
 		return video;
+	}
+
+	async createVideo(userId: string) {
+		const defaultValue: VideoDto = {
+			name: '',
+			authorId: userId,
+			videoPath: '',
+			description: '',
+			thumbnailPath: '',
+		};
+
+		const video = await this.prisma.video.create({
+			data: {
+				name: '',
+				videoPath: '',
+				description: '',
+				thumbnailPath: '',
+				authorId: userId,
+				isPublic: 'false',
+			},
+		});
+
+		return video.id;
 	}
 }
