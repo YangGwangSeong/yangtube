@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+	Injectable,
+	NotFoundException,
+	UnauthorizedException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { VideoDto } from './video/video.dto';
 
@@ -10,7 +14,7 @@ export class VideosService {
 		const video = await this.prisma.video.findFirst({
 			where: {
 				id: _id,
-				isPublic: 'true',
+				isPublic: true,
 			},
 		});
 
@@ -42,12 +46,12 @@ export class VideosService {
 							name: new RegExp(searchTerm, 'i'),
 						},
 						{
-							isPublic: 'true',
+							isPublic: true,
 						},
 					],
 			  })
 			: (where = {
-					isPublic: 'true',
+					isPublic: true,
 			  });
 
 		const video = this.prisma.video.findMany({
@@ -63,7 +67,7 @@ export class VideosService {
 		let where = {};
 		isPrivate
 			? (where = { authorId: userId })
-			: (where = { isPublic: 'true', authorId: userId });
+			: (where = { isPublic: true, authorId: userId });
 
 		const video = this.prisma.video.findMany({
 			where,
@@ -90,10 +94,41 @@ export class VideosService {
 				description: '',
 				thumbnailPath: '',
 				authorId: userId,
-				isPublic: 'false',
+				isPublic: false,
 			},
 		});
 
 		return video.id;
+	}
+
+	async updateVideo(id: string, dto: VideoDto) {
+		const updateVideo = await this.prisma.video.update({
+			where: {
+				id: id,
+			},
+			data: {
+				name: dto.name,
+				videoPath: dto.videoPath,
+				description: dto.description,
+				thumbnailPath: dto.thumbnailPath,
+				authorId: dto.authorId,
+				isPublic: dto.isPublic,
+			},
+		});
+		if (!updateVideo) throw new NotFoundException('Video not found');
+
+		return updateVideo;
+	}
+
+	async deleteVideo(id: string) {
+		const deleteVideo = await this.prisma.video.delete({
+			where: {
+				id: id,
+			},
+		});
+
+		if (!deleteVideo) throw new NotFoundException('Video not found');
+
+		return deleteVideo;
 	}
 }
