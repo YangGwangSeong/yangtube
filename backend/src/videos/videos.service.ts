@@ -131,4 +131,21 @@ export class VideosService {
 
 		return deleteVideo;
 	}
+
+	async updateCountViews(id: string) {
+		const video = await this.prisma.video.findUnique({ where: { id: id } });
+		if (!video) {
+			throw new NotFoundException('Video not found');
+		}
+		const updateVideo = await this.prisma.video.update({
+			where: {
+				id: id,
+			},
+			data: {
+				views: video.views + 1,
+			},
+		});
+
+		return updateVideo;
+	}
 }
