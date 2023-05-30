@@ -34,7 +34,6 @@ export class UsersController {
 	}
 
 	@Get('most-popular')
-	@Auth()
 	async getMostPopular() {
 		return this.usersService.getMostPopular();
 	}

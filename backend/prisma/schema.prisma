@@ -41,7 +41,6 @@ model Video {
   isPublic      Boolean   @default(false)
   views         Int?      @default(0)
   like          Int?      @default(0)
-  dislike       Int?      @default(0)
   description   String
   videoPath     String
   thumbnailPath String

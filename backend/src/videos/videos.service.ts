@@ -10,7 +10,7 @@ import { VideoDto } from './video/video.dto';
 export class VideosService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async byId(_id: string) {
+	async byId(_id: string): Promise<VideoDto> {
 		const video = await this.prisma.video.findFirst({
 			where: {
 				id: _id,
@@ -23,7 +23,7 @@ export class VideosService {
 		return video;
 	}
 
-	async getMostPopularByView() {
+	async getMostPopularByViews(): Promise<VideoDto[]> {
 		const video = this.prisma.video.findMany({
 			where: {
 				views: { gt: 0 },
@@ -36,7 +36,7 @@ export class VideosService {
 		return video;
 	}
 
-	async getAll(searchTerm?: string) {
+	async getAll(searchTerm?: string): Promise<VideoDto[]> {
 		let where = {};
 
 		searchTerm
@@ -63,7 +63,7 @@ export class VideosService {
 		return video;
 	}
 
-	async byUserId(userId: string, isPrivate = false) {
+	async byUserId(userId: string, isPrivate = false): Promise<VideoDto[]> {
 		let where = {};
 		isPrivate
 			? (where = { authorId: userId })
@@ -78,7 +78,7 @@ export class VideosService {
 		return video;
 	}
 
-	async createVideo(userId: string) {
+	async createVideo(userId: string): Promise<string> {
 		const defaultValue: VideoDto = {
 			name: '',
 			authorId: userId,
@@ -101,7 +101,7 @@ export class VideosService {
 		return video.id;
 	}
 
-	async updateVideo(id: string, dto: VideoDto) {
+	async updateVideo(id: string, dto: VideoDto): Promise<VideoDto> {
 		const updateVideo = await this.prisma.video.update({
 			where: {
 				id: id,
@@ -120,7 +120,7 @@ export class VideosService {
 		return updateVideo;
 	}
 
-	async deleteVideo(id: string) {
+	async deleteVideo(id: string): Promise<VideoDto> {
 		const deleteVideo = await this.prisma.video.delete({
 			where: {
 				id: id,
@@ -143,6 +143,23 @@ export class VideosService {
 			},
 			data: {
 				views: video.views + 1,
+			},
+		});
+
+		return updateVideo;
+	}
+
+	async updateReaction(id: string, type: 'inc' | 'dis') {
+		const video = await this.prisma.video.findUnique({ where: { id: id } });
+		if (!video) {
+			throw new NotFoundException('Video not found');
+		}
+		const updateVideo = await this.prisma.video.update({
+			where: {
+				id: id,
+			},
+			data: {
+				like: type === 'inc' ? video.like + 1 : video.like - 1,
 			},
 		});
 
