@@ -4,7 +4,7 @@ import {
 	UnauthorizedException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { VideoDto } from './video/video.dto';
+import { VideoDto } from './dto/video.dto';
 
 @Injectable()
 export class VideosService {
