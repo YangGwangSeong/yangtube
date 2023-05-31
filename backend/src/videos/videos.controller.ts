@@ -12,7 +12,7 @@ import {
 	Query,
 } from '@nestjs/common';
 import { VideosService } from './videos.service';
-import { VideoDto } from './video/video.dto';
+import { VideoDto } from './dto/video.dto';
 import { CurrentUser } from 'src/users/decorators/user.decorator';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 
