@@ -62,10 +62,12 @@ export class UsersService {
 	}
 
 	async getMostPopular() {
+		const where = {
+			subscribersCount: { gt: 0 },
+		};
+
 		const user = this.prisma.user.findMany({
-			where: {
-				subscribersCount: { gt: 0 },
-			},
+			where,
 			select: {
 				id: true,
 				name: true,

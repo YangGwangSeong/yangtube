@@ -38,10 +38,9 @@ model Video {
   id            String    @id @default(uuid()) @db.VarChar(36)
   authorId      String
   name          String    @db.VarChar(50)
-  isPublic      String
+  isPublic      Boolean   @default(false)
   views         Int?      @default(0)
   like          Int?      @default(0)
-  dislike       Int?      @default(0)
   description   String
   videoPath     String
   thumbnailPath String
