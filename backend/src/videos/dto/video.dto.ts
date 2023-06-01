@@ -15,6 +15,5 @@ export class VideoDto {
 	@IsString()
 	thumbnailPath: string;
 
-	@IsUUID()
-	authorId: string;
+	authorId?: string;
 }
