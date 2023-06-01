@@ -5,8 +5,5 @@ export class CommentDto {
 	message: string;
 
 	@IsUUID()
-	authorId: string;
-
-	@IsUUID()
 	videoId: string;
 }

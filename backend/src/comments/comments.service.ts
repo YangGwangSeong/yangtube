@@ -6,8 +6,8 @@ import { CommentDto } from './dto/comment.dto';
 export class CommentsService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async byVideoId(videoId: string) {
-		const video = this.prisma.comment.findMany({
+	async byVideoId(videoId: string): Promise<CommentDto[]> {
+		const comments = this.prisma.comment.findMany({
 			where: {
 				videoId: videoId,
 			},
@@ -15,22 +15,18 @@ export class CommentsService {
 				createdAt: 'desc',
 			},
 		});
-		return video;
+		return comments;
 	}
 
-	async createComment(
-		userId: string,
-		videoId: string,
-		dto: CommentDto,
-	): Promise<string> {
+	async createComment(userId: string, dto: CommentDto): Promise<CommentDto> {
 		const comment = await this.prisma.comment.create({
 			data: {
 				message: dto.message,
+				videoId: dto.videoId,
 				authorId: userId,
-				videoId: videoId,
 			},
 		});
 
-		return comment.id;
+		return comment;
 	}
 }
