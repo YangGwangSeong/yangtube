@@ -30,6 +30,14 @@ export class VideosController {
 		return this.videosService.byUserId(userId);
 	}
 
+	@Get('by-user-private')
+	@Auth()
+	async getVideoByUserIdPrivate(
+		@CurrentUser('id') id: string,
+	): Promise<VideoDto[]> {
+		return this.videosService.byUserId(id, true);
+	}
+
 	@Get()
 	async getAll(@Query('searchTerm') searchTerm?: string): Promise<VideoDto[]> {
 		return this.videosService.getAll(searchTerm);
