@@ -10,4 +10,5 @@ $ npm install --save-dev @types/passport-jwt
 $ npm install prisma --save-dev
 $ npm install @prisma/client
 $ npm install class-transformer
+$ npm install --save @nestjs/serve-static       // SPA 정적 서비스를 지원하기 위한 모듈
 ```
