@@ -25,6 +25,12 @@ export class VideosController {
 		return this.videosService.byId(id);
 	}
 
+	@Get('get-private/:id')
+	@Auth()
+	async getVideoPrivateById(@Param('id') id: string): Promise<VideoDto> {
+		return this.videosService.byId(id, false);
+	}
+
 	@Get('by-user/:userId')
 	async getVideoByUserId(@Param('userId') userId: string): Promise<VideoDto[]> {
 		return this.videosService.byUserId(userId);

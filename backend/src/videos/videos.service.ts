@@ -10,11 +10,11 @@ import { VideoDto } from './dto/video.dto';
 export class VideosService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async byId(_id: string): Promise<VideoDto> {
+	async byId(_id: string, isPublic = true): Promise<VideoDto> {
 		const video = await this.prisma.video.findFirst({
 			where: {
 				id: _id,
-				isPublic: true,
+				isPublic: isPublic,
 			},
 		});
 
