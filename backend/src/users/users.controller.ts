@@ -3,6 +3,7 @@ import {
 	Controller,
 	Get,
 	HttpCode,
+	Param,
 	Put,
 	UsePipes,
 	ValidationPipe,
@@ -31,6 +32,14 @@ export class UsersController {
 		@Body() dto: UserDto,
 	): Promise<void> {
 		return this.usersService.updateProfile(id, dto);
+	}
+
+	@UsePipes(new ValidationPipe())
+	@HttpCode(200)
+	@Put(':id')
+	@Auth()
+	async updateUser(@Param('id') userId: string, @Body() dto: UserDto) {
+		return this.usersService.updateProfile(userId, dto);
 	}
 
 	@Get('most-popular')
