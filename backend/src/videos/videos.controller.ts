@@ -20,9 +20,10 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 export class VideosController {
 	constructor(private readonly videosService: VideosService) {}
 
-	@Get(':id')
-	async getVideoById(@Param('id') id: string): Promise<VideoDto> {
-		return this.videosService.byId(id);
+	@Get('get-private/:id')
+	@Auth()
+	async getVideoPrivateById(@Param('id') id: string): Promise<VideoDto> {
+		return this.videosService.byId(id, false);
 	}
 
 	@Get('by-user/:userId')
@@ -89,5 +90,10 @@ export class VideosController {
 		@Query('type') type: 'inc' | 'dis',
 	): Promise<VideoDto> {
 		return this.videosService.updateReaction(videoId, type);
+	}
+
+	@Get(':id')
+	async getVideoById(@Param('id') id: string): Promise<VideoDto> {
+		return this.videosService.byId(id);
 	}
 }

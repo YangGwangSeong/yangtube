@@ -1,4 +1,5 @@
 import {
+	BadRequestException,
 	Injectable,
 	NotFoundException,
 	UnauthorizedException,
@@ -10,11 +11,11 @@ import { VideoDto } from './dto/video.dto';
 export class VideosService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async byId(_id: string): Promise<VideoDto> {
+	async byId(_id: string, isPublic = true): Promise<VideoDto> {
 		const video = await this.prisma.video.findFirst({
 			where: {
 				id: _id,
-				isPublic: true,
+				isPublic: isPublic,
 			},
 		});
 
@@ -43,7 +44,10 @@ export class VideosService {
 			? (where = {
 					AND: [
 						{
-							name: new RegExp(searchTerm, 'i'),
+							name: {
+								contains: searchTerm,
+								mode: 'insensitive',
+							},
 						},
 						{
 							isPublic: true,
@@ -65,8 +69,9 @@ export class VideosService {
 
 	async byUserId(userId: string, isPrivate = false): Promise<VideoDto[]> {
 		let where = {};
+
 		isPrivate
-			? (where = { authorId: userId })
+			? (where = { isPublic: false, authorId: userId })
 			: (where = { isPublic: true, authorId: userId });
 
 		const video = this.prisma.video.findMany({
@@ -150,6 +155,8 @@ export class VideosService {
 	}
 
 	async updateReaction(id: string, type: 'inc' | 'dis') {
+		if (!type) throw new BadRequestException('Type query is invalid!');
+
 		const video = await this.prisma.video.findUnique({ where: { id: id } });
 		if (!video) {
 			throw new NotFoundException('Video not found');
