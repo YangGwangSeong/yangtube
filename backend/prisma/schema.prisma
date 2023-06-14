@@ -26,7 +26,6 @@ model User {
   subscribersCount Int?      @default(0)
   description      String    @db.VarChar(120)
   location         String    @db.VarChar(60)
-  bannerPath       String    @db.VarChar(60)
   avatarPath       String    @db.VarChar(60)
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt

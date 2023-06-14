@@ -25,7 +25,6 @@ export class AppService {
 				subscribersCount: 123,
 				description: 'test2',
 				location: '123',
-				bannerPath: '123',
 				avatarPath: '123',
 			},
 			select: {

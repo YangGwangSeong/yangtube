@@ -50,7 +50,6 @@ export class UsersService {
 		user.name = dto.name;
 		user.description = dto.description;
 		user.location = dto.location;
-		user.bannerPath = dto.bannerPath;
 		user.avatarPath = dto.avatarPath;
 
 		const updateUser = await this.prisma.user.update({
@@ -76,7 +75,6 @@ export class UsersService {
 				subscribersCount: true,
 				description: true,
 				location: true,
-				bannerPath: true,
 				avatarPath: true,
 			},
 			orderBy: {

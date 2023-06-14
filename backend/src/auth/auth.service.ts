@@ -47,7 +47,6 @@ export class AuthService {
 				subscribersCount: 0,
 				description: '',
 				location: '',
-				bannerPath: '',
 				avatarPath: '',
 			},
 		});
