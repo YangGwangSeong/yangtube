@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { defaultValueAuthState } from 'providers/AuthProvider';
 import React, { FC } from 'react';
 import { MdPermMedia, MdSupport } from 'react-icons/md';
+import Line from '../../line/Line';
+import ProfileInfo from './profile-info/ProfileInfo';
 
 const Sidebar: FC = () => {
 	const { user, setData } = useAuth();
@@ -14,22 +16,8 @@ const Sidebar: FC = () => {
 			<Link href={'/'} className="logo" rel="noreferrer">
 				<Image src="logo.png" alt="Youtube" width={130} height={42}></Image>
 			</Link>
-			<div className="profile_info">
-				<Image src="avatar.jpg" alt="" width={70} height={70}></Image>
-				<div className="name">Nannie Nelson</div>
-				<div className="location">Montreal, QC</div>
-			</div>
-			<div className="information">
-				<div className="item">
-					<div className="top">278</div>
-					<div className="bottom">videos</div>
-				</div>
-				<div className="item">
-					<div className="top">36.5k</div>
-					<div className="bottom">subscribers</div>
-				</div>
-			</div>
-			<div className="line"></div>
+			<ProfileInfo></ProfileInfo>
+			<Line></Line>
 			<ul className="mnu_sidebar">
 				<li>
 					<Link href={'#'}>

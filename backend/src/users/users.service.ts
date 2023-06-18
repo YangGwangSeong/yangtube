@@ -17,6 +17,45 @@ export class UsersService {
 		return user;
 	}
 
+	async getUser(id: string) {
+		const videosCount = await this.prisma.user.findFirst({
+			include: {
+				_count: {
+					select: {
+						videos: true,
+					},
+				},
+			},
+		});
+
+		const { videos } = videosCount._count;
+
+		const xprisma = this.prisma.$extends({
+			result: {
+				user: {
+					videosCount: {
+						needs: {},
+						compute(user) {
+							return videos;
+						},
+					},
+				},
+			},
+		});
+		const user = await xprisma.user.findUnique({
+			include: {
+				videos: true,
+			},
+			where: {
+				id: id,
+			},
+		});
+
+		if (!user) throw new UnauthorizedException('User not found');
+
+		return user;
+	}
+
 	async byId(_id: string) {
 		const user = await this.prisma.user.findUnique({
 			where: {
