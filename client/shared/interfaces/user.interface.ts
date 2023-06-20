@@ -10,3 +10,9 @@ export interface ResponseUser {
 	updatedAt: string;
 	videosCount?: number;
 }
+
+export interface UserDto
+	extends Pick<
+		ResponseUser,
+		'email' | 'name' | 'description' | 'location' | 'avatarPath'
+	> {}

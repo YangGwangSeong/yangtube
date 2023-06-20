@@ -18,42 +18,75 @@ export class UsersService {
 	}
 
 	async getUser(id: string) {
-		const videosCount = await this.prisma.user.findFirst({
-			include: {
+		// const videosCount = await this.prisma.user.findMany({
+		// 	include: {
+		// 		_count: {
+		// 			select: {
+		// 				videos: true,
+		// 			},
+		// 		},
+		// 	},
+		// });
+
+		// const xprisma = this.prisma.$extends({
+		// 	result: {
+		// 		user: {
+		// 			videosCount: {
+		// 				needs: {},
+		// 				compute(user) {
+		// 					return 1;
+		// 				},
+		// 			},
+		// 		},
+		// 	},
+		// });
+
+		const user = await this.prisma.user.findUnique({
+			// include: {
+			// 	_count: {
+			// 		select: {
+			// 			videos: true,
+			// 		},
+			// 	},
+			// },
+			where: {
+				id: id,
+			},
+			select: {
+				id: true,
+				name: true,
+				email: true,
+				isVerified: true,
+				subscribersCount: true,
+				description: true,
+				location: true,
+				avatarPath: true,
+				createdAt: true,
+				updatedAt: true,
 				_count: {
 					select: {
 						videos: true,
+						comments: true,
 					},
 				},
-			},
-		});
-
-		const { videos } = videosCount._count;
-
-		const xprisma = this.prisma.$extends({
-			result: {
-				user: {
-					videosCount: {
-						needs: {},
-						compute(user) {
-							return videos;
-						},
-					},
-				},
-			},
-		});
-		const user = await xprisma.user.findUnique({
-			include: {
-				videos: true,
-			},
-			where: {
-				id: id,
 			},
 		});
 
 		if (!user) throw new UnauthorizedException('User not found');
 
-		return user;
+		return {
+			id: user.id,
+			name: user.name,
+			email: user.email,
+			isVerified: user.isVerified,
+			subscribersCount: user.subscribersCount,
+			description: user.description,
+			location: user.location,
+			avatarPath: user.avatarPath,
+			videosCount: user._count.videos,
+			createdAt: user.createdAt,
+			updatedAt: user.updatedAt,
+		};
 	}
 
 	async byId(_id: string) {
