@@ -11,6 +11,6 @@ export const UserService = {
 	},
 
 	async updateProfile(body: UserDto) {
-		return await axios.put<UserDto>('/users/profile', body);
+		return await axios.put<ResponseUser>('/users/profile', body);
 	},
 };
