@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useQuery } from 'react-query';
 import { UserService } from '@/services/user/UserService';
 import Loader from '../../Loader';
+import { formatNumberToK } from '@/utils/formatNumberToK';
 
 const ProfileInfo: FC = () => {
 	const { data, isLoading } = useQuery(
@@ -29,7 +30,9 @@ const ProfileInfo: FC = () => {
 					<div className="bottom">videos</div>
 				</div>
 				<div className="item">
-					<div className="top">{data?.subscripbersCount}</div>
+					<div className="top">
+						{formatNumberToK(data?.subscripbersCount || 0)}
+					</div>
 					{/* <div className="top">36.5k</div> */}
 					<div className="bottom">subscribers</div>
 				</div>

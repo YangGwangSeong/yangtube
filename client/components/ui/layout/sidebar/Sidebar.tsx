@@ -6,7 +6,7 @@ import { defaultValueAuthState } from 'providers/AuthProvider';
 import React, { FC } from 'react';
 import { MdPermMedia, MdSupport } from 'react-icons/md';
 import Line from '../../line/Line';
-import ProfileInfo from './profile-info/ProfileInfo';
+import ProfileInfo from './ProfileInfo';
 
 const Sidebar: FC = () => {
 	const { user, setData } = useAuth();
