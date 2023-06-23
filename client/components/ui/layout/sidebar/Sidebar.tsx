@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { defaultValueAuthState } from 'providers/AuthProvider';
 import React, { FC } from 'react';
-import { MdPermMedia, MdSupport } from 'react-icons/md';
 import Line from '../../line/Line';
 import ProfileInfo from './ProfileInfo';
+import Menu from './menu/Menu';
 
 const Sidebar: FC = () => {
 	const { user, setData } = useAuth();
@@ -16,29 +16,12 @@ const Sidebar: FC = () => {
 			<Link href={'/'} className="logo" rel="noreferrer">
 				<Image src="logo.png" alt="Youtube" width={130} height={42}></Image>
 			</Link>
+
 			<ProfileInfo></ProfileInfo>
+
 			<Line></Line>
-			<ul className="mnu_sidebar">
-				<li>
-					<Link href={'#'}>
-						<Image src="multimedia.svg" alt=""></Image>
-						<b>Video</b>
-					</Link>
-				</li>
-				<li>
-					<Link href={'#'}>
-						<Image src="video-camera/svg" alt=""></Image>
-						<b>Movies & Shows</b>
-					</Link>
-				</li>
-			</ul>
-			<div className="switch_wrapper">
-				<label className="switch">
-					<input type="checkbox" defaultChecked />
-					<span className="slider round"></span>
-				</label>
-				<p>Light On</p>
-			</div>
+
+			<Menu />
 
 			<button
 				id="logout_btn"
@@ -49,6 +32,7 @@ const Sidebar: FC = () => {
 			>
 				Logout
 			</button>
+			<div className="copy">2023 copy right</div>
 		</section>
 	) : null;
 };
