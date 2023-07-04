@@ -14,11 +14,11 @@ export const VideoService = {
 		return axiosClassic.get<ResponseVideo>(`/videos/${id}`);
 	},
 
-	async getAllVideos(id: string) {
+	async getAllVideos() {
 		return axiosClassic.get<ResponseVideo[]>(`/videos`);
 	},
 
-	async getMostPopular(id: string) {
+	async getMostPopular() {
 		return axiosClassic.get<ResponseVideo[]>(`/videos/most-popular`);
 	},
 
