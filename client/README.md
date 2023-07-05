@@ -11,4 +11,6 @@ $ npm i js-cookie
 $ npm i --save-dev @types/js-cookie
 $ npm i swiper
 $ npm install react-loading-skeleton
+$ npm i lodash
+$ npm i -D @types/lodash
 ```
