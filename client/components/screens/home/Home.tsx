@@ -4,8 +4,9 @@ import Line from '@/components/ui/line/Line';
 import Recommended from './recommended/Recommended';
 import RightSide from '@/components/ui/layout/right-side/RightSide';
 import Layout from '@/components/ui/layout/Layout';
+import { HomeProps } from './home.interface';
 
-const Home: FC = () => {
+const Home: FC<HomeProps> = ({ weeklyVideos }) => {
 	return (
 		<Layout title="Yangtube">
 			<div className="wrapper_content">
