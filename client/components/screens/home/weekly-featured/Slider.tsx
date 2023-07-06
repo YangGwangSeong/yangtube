@@ -15,16 +15,18 @@ const Slider: FC = () => {
 				delay: 3000,
 			}}
 		>
-			<SwiperSlide className="video_item">
-				<div className="thumbnail">
-					<Image src="1.jpg" alt=""></Image>
-					<time>16:55</time>
-				</div>
-				<div className="author">Michel Adams</div>
-				<div className="name">Day in my life: Summer ...</div>
-				<div className="number_info">
-					<div className="views">VIEWS 28.6K</div>
-					<div className="date">6DS AGO</div>
+			<SwiperSlide>
+				<div className="video_item">
+					<div className="thumbnail">
+						<Image src="1.jpg" alt=""></Image>
+						<time>16:55</time>
+					</div>
+					<div className="author">Michel Adams</div>
+					<div className="name">Day in my life: Summer ...</div>
+					<div className="number_info">
+						<div className="views">VIEWS 28.6K</div>
+						<div className="date">6DS AGO</div>
+					</div>
 				</div>
 			</SwiperSlide>
 
