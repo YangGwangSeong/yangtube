@@ -1,4 +1,5 @@
 import { ResponseVideo } from '@/shared/interfaces/video.interface';
+import { formatNumberToK } from '@/utils/formatNumberToK';
 import Image from 'next/image';
 import React, { FC } from 'react';
 
@@ -12,13 +13,13 @@ const VideoItem: FC<{ item: ResponseVideo }> = ({ item }) => {
 					width={163}
 					height={91}
 				></Image>
-				<time>16:55</time>
+				<time>{item.createdAt}</time>
 			</div>
-			<div className="author">Michel Adams</div>
-			<div className="name">Day in my life: Summer ...</div>
+			<div className="author">{item.user?.name}</div>
+			<div className="name">{item.name}</div>
 			<div className="number_info">
-				<div className="views">VIEWS 28.6K</div>
-				<div className="date">6DS AGO</div>
+				<div className="views">VIEWS {formatNumberToK(item.views)}</div>
+				{/* <div className="date">6DS AGO</div> */}
 			</div>
 		</div>
 	);
