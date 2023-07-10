@@ -2,8 +2,10 @@ import Image from 'next/image';
 import React, { FC } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import VideoItem from '@/components/ui/video-item/VideoItem';
+import { ResponseVideo } from '@/shared/interfaces/video.interface';
 
-const Slider: FC = () => {
+const Slider: FC<{ videos: ResponseVideo[] }> = ({ videos }) => {
 	return (
 		<Swiper
 			spaceBetween={10}
@@ -15,46 +17,11 @@ const Slider: FC = () => {
 				delay: 3000,
 			}}
 		>
-			<SwiperSlide>
-				<div className="video_item">
-					<div className="thumbnail">
-						<Image src="1.jpg" alt=""></Image>
-						<time>16:55</time>
-					</div>
-					<div className="author">Michel Adams</div>
-					<div className="name">Day in my life: Summer ...</div>
-					<div className="number_info">
-						<div className="views">VIEWS 28.6K</div>
-						<div className="date">6DS AGO</div>
-					</div>
-				</div>
-			</SwiperSlide>
-
-			<SwiperSlide className="video_item">
-				<div className="thumbnail">
-					<Image src="1.jpg" alt=""></Image>
-					<time>16:55</time>
-				</div>
-				<div className="author">Michel Adams</div>
-				<div className="name">Day in my life: Summer ...</div>
-				<div className="number_info">
-					<div className="views">VIEWS 28.6K</div>
-					<div className="date">6DS AGO</div>
-				</div>
-			</SwiperSlide>
-
-			<SwiperSlide className="video_item">
-				<div className="thumbnail">
-					<Image src="1.jpg" alt=""></Image>
-					<time>16:55</time>
-				</div>
-				<div className="author">Michel Adams</div>
-				<div className="name">Day in my life: Summer ...</div>
-				<div className="number_info">
-					<div className="views">VIEWS 28.6K</div>
-					<div className="date">6DS AGO</div>
-				</div>
-			</SwiperSlide>
+			{videos.map(video => (
+				<SwiperSlide key={video.id}>
+					<VideoItem item={video}></VideoItem>
+				</SwiperSlide>
+			))}
 		</Swiper>
 	);
 };

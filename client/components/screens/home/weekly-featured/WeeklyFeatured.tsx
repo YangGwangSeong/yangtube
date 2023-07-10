@@ -1,8 +1,17 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
 import Slider from './Slider';
+import { ResponseVideo } from '@/shared/interfaces/video.interface';
 
-const WeeklyFeatured: FC = () => {
+interface WeeklyFeaturedProps {
+	weeklyVideos: ResponseVideo[];
+	randomVideo: ResponseVideo;
+}
+
+const WeeklyFeatured: FC<WeeklyFeaturedProps> = ({
+	weeklyVideos,
+	randomVideo,
+}) => {
 	return (
 		<div className="weekly_featured">
 			<div className="info_wf">
@@ -12,7 +21,7 @@ const WeeklyFeatured: FC = () => {
 					Loerm ipsum dolor sit amet, consectetur adipisicing elit. Aliguam
 					harum
 				</div>
-				<Slider />
+				<Slider videos={weeklyVideos} />
 			</div>
 
 			<div className="top_video">

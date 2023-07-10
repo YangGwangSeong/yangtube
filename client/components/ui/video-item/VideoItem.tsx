@@ -19,7 +19,7 @@ const VideoItem: FC<{ item: ResponseVideo }> = ({ item }) => {
 			<div className="name">{item.name}</div>
 			<div className="number_info">
 				<div className="views">VIEWS {formatNumberToK(item.views)}</div>
-				{/* <div className="date">6DS AGO</div> */}
+				<div className="date">{item.createdAt}</div>
 			</div>
 		</div>
 	);
