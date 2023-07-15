@@ -6,12 +6,15 @@ import RightSide from '@/components/ui/layout/right-side/RightSide';
 import Layout from '@/components/ui/layout/Layout';
 import { HomeProps } from './home.interface';
 
-const Home: FC<HomeProps> = ({ weeklyVideos }) => {
+const Home: FC<HomeProps> = ({ weeklyVideos, randomVideo }) => {
 	return (
 		<Layout title="Yangtube">
 			<div className="wrapper_content">
 				<div className="left_side">
-					<WeeklyFeatured></WeeklyFeatured>
+					<WeeklyFeatured
+						weeklyVideos={weeklyVideos}
+						randomVideo={randomVideo}
+					></WeeklyFeatured>
 
 					<Line />
 

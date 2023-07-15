@@ -60,6 +60,13 @@ export class VideosService {
 
 		const video = this.prisma.video.findMany({
 			where,
+			include: {
+				author: {
+					select: {
+						name: true,
+					},
+				},
+			},
 			orderBy: {
 				createdAt: 'desc',
 			},
