@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { FC } from 'react';
 import Slider from './Slider';
 import { ResponseVideo } from '@/shared/interfaces/video.interface';
+import VideoItem from '@/components/ui/video-item/VideoItem';
 
 interface WeeklyFeaturedProps {
 	weeklyVideos: ResponseVideo[];
@@ -25,7 +26,8 @@ const WeeklyFeatured: FC<WeeklyFeaturedProps> = ({
 			</div>
 
 			<div className="top_video">
-				<div className="video_item">
+				<VideoItem item={randomVideo}></VideoItem>
+				{/* <div className="video_item">
 					<div className="thumnail">
 						<Image src="3jpg" alt=""></Image>
 						<time>28:32</time>
@@ -46,7 +48,7 @@ const WeeklyFeatured: FC<WeeklyFeaturedProps> = ({
 						<div className="likes">LIKES 1.6K</div>
 						<div className="data">3DS AGO</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

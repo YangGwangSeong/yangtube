@@ -11,7 +11,6 @@ const HomePage: NextPage<HomeProps> = props => {
 export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const { data: newVideos } = await VideoService.getAllVideos();
-		const randomVideo = {};
 		const topVideo = {};
 		const topChannels = [{}];
 
@@ -19,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
 			props: {
 				newVideos,
 				weeklyVideos: shuffle(newVideos).slice(0, 5),
-				randomVideo,
+				randomVideo: shuffle(newVideos)[0],
 				topVideo,
 				topChannels,
 			},
