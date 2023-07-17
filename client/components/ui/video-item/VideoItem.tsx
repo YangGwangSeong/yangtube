@@ -12,8 +12,8 @@ dayjs.extend(relativeTime);
 
 const VideoItem: FC<VideoItem> = ({ item, isLarge, isAvatar }) => {
 	return (
-		<Link href={`/v/${item.id}`}>
-			<div className="video_item">
+		<div className="video_item">
+			<Link href={`/v/${item.id}`}>
 				<div className="thumbnail">
 					<Image
 						src={item.thumbnailPath}
@@ -35,14 +35,16 @@ const VideoItem: FC<VideoItem> = ({ item, isLarge, isAvatar }) => {
 				</div>
 				<div className="author">{item.user?.name}</div>
 				<div className="name">{item.name}</div>
-				<div className="number_info">
-					<div className="views">VIEWS {formatNumberToK(item.views)}</div>
-					<div className="date">
-						{dayjs(new Date(item.createdAt)).fromNow()}
-					</div>
-				</div>
+			</Link>
+			{isLarge && <div className="description">{item.description}</div>}
+			<div className="number_info">
+				<div className="views">VIEWS {formatNumberToK(item.views)}</div>
+				{isLarge && (
+					<div className="likes">LIKES {formatNumberToK(item.likes)}</div>
+				)}
+				<div className="date">{dayjs(new Date(item.createdAt)).fromNow()}</div>
 			</div>
-		</Link>
+		</div>
 	);
 };
 

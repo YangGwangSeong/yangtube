@@ -18,7 +18,13 @@ const ProfileInfo: FC = () => {
 		<>
 			<div className="profile_info">
 				{data?.avatarPath && (
-					<Image src={data.avatarPath} alt="" width={70} height={70}></Image>
+					<Image
+						src={data.avatarPath}
+						alt=""
+						width={120}
+						height={120}
+						quality={90}
+					></Image>
 				)}
 
 				<div className="name">{data?.name}</div>
