@@ -8,7 +8,7 @@ const Menu: FC = () => {
 			{menu.map((menu, index) => (
 				<Fragment key={index}>
 					<MenuItem item={menu}></MenuItem>
-					{index === 3 && <div className="line_mnu"></div>}
+					{index === 2 && <div className="line_mnu"></div>}
 				</Fragment>
 			))}
 		</ul>
