@@ -1,7 +1,9 @@
+import VideoItem from '@/components/ui/video-item/VideoItem';
+import { ResponseVideo } from '@/shared/interfaces/video.interface';
 import Image from 'next/image';
 import React, { FC } from 'react';
 
-const Recommended: FC = () => {
+const Recommended: FC<{ newVideos: ResponseVideo[] }> = ({ newVideos }) => {
 	return (
 		<div className="recommended">
 			<div className="top_block">
@@ -13,41 +15,9 @@ const Recommended: FC = () => {
 			</div>
 
 			<div className="catalog">
-				<div className="video_item">
-					<div className="thumbnail">
-						<Image src="4.jpg" alt=""></Image>
-						<time>28:32</time>
-						<div className="avatar">
-							<Image src="avatar" alt=""></Image>
-						</div>
-					</div>
-					<div className="author">Warren Munoz</div>
-					<div className="name">
-						Lake House Vacation! Boating, Tubing & More!
-					</div>
-					<div className="number_info">
-						<div className="views">VIEWS 29.2k</div>
-						<div className="date">3DS AGO</div>
-					</div>
-				</div>
-
-				<div className="video_item">
-					<div className="thumbnail">
-						<Image src="4.jpg" alt=""></Image>
-						<time>28:32</time>
-						<div className="avatar">
-							<Image src="avatar" alt=""></Image>
-						</div>
-					</div>
-					<div className="author">Warren Munoz</div>
-					<div className="name">
-						Lake House Vacation! Boating, Tubing & More!
-					</div>
-					<div className="number_info">
-						<div className="views">VIEWS 29.2k</div>
-						<div className="date">3DS AGO</div>
-					</div>
-				</div>
+				{newVideos.map(video => (
+					<VideoItem item={video} key={video.id} isAvatar></VideoItem>
+				))}
 			</div>
 		</div>
 	);

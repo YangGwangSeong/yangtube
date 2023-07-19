@@ -18,7 +18,7 @@ const Home: FC<HomeProps> = ({ weeklyVideos, randomVideo, newVideos }) => {
 
 					<Line />
 
-					<Recommended />
+					<Recommended newVideos={newVideos} />
 				</div>
 				<RightSide></RightSide>
 			</div>
