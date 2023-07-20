@@ -4,4 +4,5 @@ export interface VideoItem {
 	item: ResponseVideo;
 	isLarge?: boolean;
 	isAvatar?: boolean;
+	tag?: string;
 }
