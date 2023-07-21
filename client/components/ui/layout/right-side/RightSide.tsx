@@ -8,10 +8,10 @@ import { ResponseUser } from '@/shared/interfaces/user.interface';
 const RightSide: FC<{
 	topVideo: ResponseVideo;
 	topChannels: ResponseUser[];
-}> = () => {
+}> = props => {
 	return (
 		<div className="right_side">
-			<MostPopularVideo></MostPopularVideo>
+			<MostPopularVideo video={props.topVideo}></MostPopularVideo>
 
 			<Line></Line>
 
