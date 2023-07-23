@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ResponseUser } from '@/shared/interfaces/user.interface';
 
-const TopChannels: FC = () => {
+const TopChannels: FC<{ channels: ResponseUser[] }> = ({ channels }) => {
 	return (
 		<div className="top_channels">
 			<div className="title_gray">
