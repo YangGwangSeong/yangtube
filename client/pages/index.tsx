@@ -11,8 +11,13 @@ const HomePage: NextPage<HomeProps> = props => {
 export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const { data: newVideos } = await VideoService.getAllVideos();
-		const topVideo = {};
-		const topChannels = [{}];
+		const topVideo = await VideoService.getMostPopular().then(
+			({ data }) => data[0],
+		);
+
+		const topChannels = await VideoService.getMostPopular().then(
+			({ data }) => data[0],
+		);
 
 		return {
 			props: {
