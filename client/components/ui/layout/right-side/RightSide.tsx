@@ -15,7 +15,7 @@ const RightSide: FC<{
 
 			<Line></Line>
 
-			<TopChannels></TopChannels>
+			<TopChannels channels={props.topChannels}></TopChannels>
 		</div>
 	);
 };

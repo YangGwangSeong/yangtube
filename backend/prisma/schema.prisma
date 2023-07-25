@@ -23,7 +23,7 @@ model User {
   name             String    @db.VarChar(30)
   email            String    @unique @db.VarChar(60)
   password         String    @db.VarChar(60)
-  isVerified       Boolean
+  isVerified       Boolean   @default(false)
   subscribersCount Int?      @default(0)
   description      String    @db.VarChar(120)
   location         String    @db.VarChar(60)
