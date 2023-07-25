@@ -9,14 +9,19 @@ const ChannelItem: FC<{ item: ResponseUser }> = ({ item }) => {
 		<div className="channel">
 			<div className="info_left">
 				<Link href={`/c/${item.id}`}>
-					<Image src="avatar.jpg" alt=""></Image>
+					<Image
+						src={item.avatarPath}
+						alt={item.name}
+						width={60}
+						height={60}
+					></Image>
 				</Link>
 				<div className="info">
 					<div className="name">{item.name}</div>
 					<div>{formatNumberToK(item.subscripbersCount)} Subscribers</div>
 				</div>
 			</div>
-			<Link href="#" className="mnu">
+			<Link href={`/c/${item.id}`} className="mnu">
 				<Image src="open_menu.svg" alt=""></Image>
 			</Link>
 		</div>
