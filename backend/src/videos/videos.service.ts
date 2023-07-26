@@ -26,6 +26,15 @@ export class VideosService {
 
 	async getMostPopularByViews(): Promise<VideoDto[]> {
 		const video = this.prisma.video.findMany({
+			include: {
+				author: {
+					select: {
+						name: true,
+						avatarPath: true,
+						isVerified: true,
+					},
+				},
+			},
 			where: {
 				views: { gt: 0 },
 			},
@@ -64,6 +73,8 @@ export class VideosService {
 				author: {
 					select: {
 						name: true,
+						avatarPath: true,
+						isVerified: true,
 					},
 				},
 			},

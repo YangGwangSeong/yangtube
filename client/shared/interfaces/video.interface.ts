@@ -8,7 +8,7 @@ export interface ResponseVideo {
 	videoPath: string;
 	views: number;
 	likes: number;
-	user?: ResponseUser;
+	author?: ResponseUser;
 	isPublic?: boolean;
 	createdAt: string;
 	updatedAt: string;
