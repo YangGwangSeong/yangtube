@@ -9,6 +9,7 @@ export interface ResponseUser {
 	createdAt: string;
 	updatedAt: string;
 	videosCount?: number;
+	isVerified: boolean;
 }
 
 export interface UserDto

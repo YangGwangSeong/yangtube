@@ -18,8 +18,8 @@ const VideoItem: FC<VideoItem> = ({ item, isLarge, isAvatar, tag }) => {
 					<Image
 						src={item.thumbnailPath}
 						alt={item.name}
-						width={163}
-						height={91}
+						width={185}
+						height={103}
 					></Image>
 					<VideoDuration videoPath={item.videoPath}></VideoDuration>
 					{tag && <div className="hot">{tag}</div>}
@@ -28,8 +28,8 @@ const VideoItem: FC<VideoItem> = ({ item, isLarge, isAvatar, tag }) => {
 							<Image
 								src={item.user?.avatarPath || ''}
 								alt={item.user?.name || ''}
-								width={36}
-								height={36}
+								width={50}
+								height={50}
 							></Image>
 						</div>
 					)}
