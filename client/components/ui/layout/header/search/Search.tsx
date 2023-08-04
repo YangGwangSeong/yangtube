@@ -18,7 +18,7 @@ const Search: FC = () => {
 				<Image src="/" alt="" width={40} height={40}></Image>
 			</label>
 			{isSuccess && (
-				<div className="result">
+				<div className="result shadow-block">
 					{data?.length ? (
 						data.map(video => (
 							<VideoItem item={video} key={video.id}></VideoItem>
