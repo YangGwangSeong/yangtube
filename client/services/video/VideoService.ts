@@ -15,9 +15,13 @@ export const VideoService = {
 	},
 
 	async getAllVideos(searchTerm?: string) {
-		return axiosClassic.get<ResponseVideo[]>(
-			`/videos?searchTerm=${searchTerm}`,
-		);
+		return axiosClassic.get<ResponseVideo[]>(`/videos`, {
+			params: searchTerm
+				? {
+						searchTerm,
+				  }
+				: {},
+		});
 	},
 
 	async getMostPopular() {
