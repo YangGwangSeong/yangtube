@@ -11,7 +11,7 @@ export const useSearch = () => {
 		['search videos', debounceSearch],
 		() => VideoService.getAllVideos(debounceSearch),
 		{
-			select: ({ data }) => data,
+			select: ({ data }) => data.slice(0, 4),
 			enabled: !!debounceSearch,
 		},
 	);
