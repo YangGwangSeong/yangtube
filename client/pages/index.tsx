@@ -1,5 +1,6 @@
 import Home from '@/components/screens/home/Home';
 import { HomeProps } from '@/components/screens/home/home.interface';
+import { UserService } from '@/services/user/UserService';
 import { VideoService } from '@/services/video/VideoService';
 import { shuffle } from 'lodash';
 import { GetStaticProps, NextPage } from 'next';
@@ -15,8 +16,8 @@ export const getStaticProps: GetStaticProps = async () => {
 			({ data }) => data[0],
 		);
 
-		const topChannels = await VideoService.getMostPopular().then(
-			({ data }) => data[0],
+		const topChannels = await UserService.getMostPopular().then(
+			({ data }) => data,
 		);
 
 		return {

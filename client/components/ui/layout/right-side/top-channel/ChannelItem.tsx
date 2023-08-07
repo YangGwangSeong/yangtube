@@ -29,7 +29,7 @@ const ChannelItem: FC<{ item: ResponseUser }> = ({ item }) => {
 				</div>
 			</div>
 			<Link href={`/c/${item.id}`} className="mnu">
-				<Image src="open_menu.svg" alt=""></Image>
+				<Image src="/" alt="" width={30} height={30}></Image>
 			</Link>
 		</div>
 	);

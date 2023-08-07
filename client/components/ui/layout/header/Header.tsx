@@ -2,19 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
 import IconsRight from './icons/IconsRight';
+import Search from './search/Search';
 
 const Header: FC = () => {
 	return (
 		<header>
-			<div className="search_top">
-				<label>
-					<input
-						type="text"
-						placeholder="Search videos, starts or authors..."
-					/>
-					<Image src="search.svg" alt=""></Image>
-				</label>
-			</div>
+			<Search></Search>
 			<IconsRight></IconsRight>
 		</header>
 	);

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
 module.exports = {
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
@@ -39,5 +40,17 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [
+		plugin(({ addComponents, theme }) => {
+			addComponents({
+				'.shadow-block': {
+					display: 'block',
+					boxShadow: theme('boxShadow.lg'),
+					padding: theme('padding.4'),
+					animation: theme('animation.scaleIn'),
+					backgroundColor: theme('backgroundColor.white'),
+				},
+			});
+		}),
+	],
 };
